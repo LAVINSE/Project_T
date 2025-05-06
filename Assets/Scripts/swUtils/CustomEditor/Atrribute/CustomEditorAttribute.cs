@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(MonoBehaviour), true)]
+[CustomEditor(typeof(UnityEngine.Object), true)]
 public class CustomEditorAttribute : Editor
 {
     private Dictionary<string, object[]> parameterValues = new Dictionary<string, object[]>();
@@ -12,8 +12,8 @@ public class CustomEditorAttribute : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        MonoBehaviour mono = (MonoBehaviour)target;
-        var type = mono.GetType();
+        UnityEngine.Object obj = (UnityEngine.Object)target;
+        var type = obj.GetType();
         var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
         foreach (var method in methods)
@@ -77,7 +77,7 @@ public class CustomEditorAttribute : Editor
                     {
                         try
                         {
-                            method.Invoke(mono, parameterValues[method.Name]);
+                            method.Invoke(obj, parameterValues[method.Name]);
                         }
                         catch (Exception e)
                         {
@@ -86,7 +86,7 @@ public class CustomEditorAttribute : Editor
                     }
                     else
                     {
-                        method.Invoke(mono, null);
+                        method.Invoke(obj, null);
                     }
                 }
             }

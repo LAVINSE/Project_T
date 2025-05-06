@@ -97,25 +97,7 @@ public static class CustomEditorSceneToolbar
         /** 툴바 GUI 렌더링한다 */
         private static void OnToolbarGUI()
         {
-            // 타임 스케일 조절
-            GUILayout.Label("Time Scale");
 
-            float newSliderValue = GUILayout.HorizontalSlider(sliderValue, sliderLeftValue, sliderRightValue, GUILayout.Width(100f));
-            GUILayout.Label(sliderValue.ToString("0.00"), ToolbarStyles.fontStyle);
-
-            isTimeScaleEnabled = GUILayout.Toggle(isTimeScaleEnabled, "IsEnabled", GUILayout.Width(70f));
-
-            if (isTimeScaleEnabled)
-            {
-                if (newSliderValue != previousSliderValue)
-                {
-                    sliderValue = newSliderValue;
-                    TimeScaleHelper.ChangeTimScale(sliderValue);
-                    previousSliderValue = sliderValue;
-                }
-            }
-
-            GUILayout.FlexibleSpace();
         }
     }
 

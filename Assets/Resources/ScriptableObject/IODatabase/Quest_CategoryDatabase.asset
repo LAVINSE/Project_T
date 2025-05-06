@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9dfcba289c37f4ba03c9fdd5688ba3, type: 3}
-  m_Name: CustomEditorFontSO
+  m_Script: {fileID: 11500000, guid: 2cce9979a04bddc4a972f39a9c07b603, type: 3}
+  m_Name: Quest_CategoryDatabase
   m_EditorClassIdentifier: 
-  fontList: []
-  isSetting: 0
+  datas: []

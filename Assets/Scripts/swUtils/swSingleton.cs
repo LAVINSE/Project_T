@@ -13,11 +13,13 @@ public class SwSingleton<T> : MonoBehaviour where T : Component
         {
             if(instance == null)
             {
-                instance = (T)FindAnyObjectByType(typeof(T));
+                instance = FindAnyObjectByType<T>();
 
-                if(instance == null)
+                if (instance == null)
                 {
-                    SetupInstance();
+                    GameObject obj = new GameObject(typeof(T).Name);
+                    instance = obj.AddComponent<T>();
+                    DontDestroyOnLoad(obj);
                 }
             }
 
@@ -27,19 +29,6 @@ public class SwSingleton<T> : MonoBehaviour where T : Component
     #endregion // 프로퍼티
 
     #region 함수
-    private static void SetupInstance()
-    {
-        instance = (T)FindAnyObjectByType(typeof(T));
-
-        if (instance == null)
-        {
-            GameObject obj = new GameObject();
-            obj.name = typeof(T).Name;
-            instance = obj.AddComponent<T>();
-            DontDestroyOnLoad(obj);
-        }
-    }
-
     public virtual void Awake()
     {
         RemoveDuplicates();
@@ -52,7 +41,7 @@ public class SwSingleton<T> : MonoBehaviour where T : Component
             instance = this as T;
             DontDestroyOnLoad(this.gameObject);
         }
-        else
+        else if (instance != this)
         {
             Destroy(this.gameObject);
         }
